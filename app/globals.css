@@ -1,26 +1,82 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  /* Fonts */
+  --font-heading: var(--font-cormorant);
+  --font-body: var(--font-inter);
+
+  /* Sage green palette */
+  --color-sage-50: #f2f7f2;
+  --color-sage-100: #deeede;
+  --color-sage-200: #bdddbd;
+  --color-sage-300: #90c290;
+  --color-sage-400: #61a262;
+  --color-sage-500: #4a8a4d;
+  --color-sage-600: #3b6f3d;
+  --color-sage-700: #2f5830;
+  --color-sage-800: #274628;
+  --color-sage-900: #1f3820;
+
+  /* Teal palette */
+  --color-teal-50: #f0fafa;
+  --color-teal-100: #d8f2f2;
+  --color-teal-200: #b0e4e4;
+  --color-teal-300: #7ecece;
+  --color-teal-400: #4bb3b3;
+  --color-teal-500: #2d9898;
+  --color-teal-600: #237a7a;
+  --color-teal-700: #1e6464;
+  --color-teal-800: #1a5050;
+  --color-teal-900: #163d3d;
+
+  /* Cream */
+  --color-cream: #faf7f2;
+  --color-cream-dark: #f0ebe0;
+
+  /* Night */
+  --color-night: #1a2638;
+  --color-night-light: #2d3f55;
+
+  /* Gold */
+  --color-gold: #c9a84c;
+  --color-gold-light: #d4b86a;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--color-cream);
+  color: var(--color-night);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 5px;
+}
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-sage-500);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-teal-700);
+}
+
+/* Focus styles */
+*:focus-visible {
+  outline: 2px solid var(--color-sage-500);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* Selection */
+::selection {
+  background: var(--color-sage-200);
+  color: var(--color-night);
 }

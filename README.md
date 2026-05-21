@@ -1,36 +1,152 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Centro Psicológico Horizonte — Landing Page Portfolio
 
-## Getting Started
+Landing page profesional para un psicólogo ficticio, creada como proyecto de portfolio para agencia web.
+Stack: **Next.js 16 · TypeScript · Tailwind CSS 4 · Framer Motion · React Hook Form + Zod · Nodemailer**
 
-First, run the development server:
+> **Todos los datos del sitio son ficticios.** El único dato real es el email de prueba: `sayitlouder.dev@gmail.com`
+
+---
+
+## Instalación y arranque
 
 ```bash
+# 1. Entra a la carpeta del proyecto
+cd D:\CHATGPT\PSICOLOGO
+
+# 2. Instala dependencias
+npm install
+
+# 3. Crea el archivo de variables de entorno
+copy .env.example .env.local
+
+# 4. Arranca el servidor de desarrollo
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Abre [http://localhost:3000](http://localhost:3000) en tu navegador.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Variables de entorno
 
-## Learn More
+Copia `.env.example` a `.env.local` y edita según necesites:
 
-To learn more about Next.js, take a look at the following resources:
+| Variable           | Descripción                                          | Obligatoria |
+|--------------------|------------------------------------------------------|-------------|
+| `CONTACT_TO_EMAIL` | Email que recibirá los mensajes del formulario       | No (default: `sayitlouder.dev@gmail.com`) |
+| `SMTP_HOST`        | Host SMTP para envío de emails                       | No          |
+| `SMTP_PORT`        | Puerto SMTP (587 por defecto)                        | No          |
+| `SMTP_USER`        | Usuario / dirección SMTP                             | No          |
+| `SMTP_PASS`        | Contraseña SMTP (usa App Password con Gmail)         | No          |
+| `SMTP_FROM`        | Dirección remitente visible                          | No          |
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+**Nota:** Si SMTP no está configurado, el formulario sigue funcionando: las consultas se guardan automáticamente en `data/contact-submissions.json`.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+---
 
-## Deploy on Vercel
+## Formulario de contacto
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Comportamiento
+- Validación **cliente**: React Hook Form + Zod (mensajes en español)
+- Validación **servidor**: Zod en la API route `/api/contact`
+- **Anti-spam**: campo honeypot oculto; si se rellena, retorna éxito falso
+- **Con SMTP configurado**: envía email HTML a `CONTACT_TO_EMAIL`
+- **Sin SMTP**: guarda el lead en `data/contact-submissions.json`
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### Probar el formulario sin SMTP
+
+1. Arranca con `npm run dev`
+2. Rellena y envía el formulario en `http://localhost:3000/#contacto`
+3. Revisa el archivo `data/contact-submissions.json` — aparecerá el lead guardado
+
+### Ejemplo de `contact-submissions.json`
+```json
+[
+  {
+    "name": "Ana García",
+    "email": "ana@ejemplo.com",
+    "phone": "+52 999 000 0000",
+    "reason": "ansiedad",
+    "modality": "online",
+    "message": "Me gustaría agendar una primera sesión.",
+    "createdAt": "2026-05-20T10:30:00.000Z"
+  }
+]
+```
+
+---
+
+## Estructura del proyecto
+
+```
+D:\CHATGPT\PSICOLOGO\
+├── app/
+│   ├── layout.tsx          # Layout raíz con fuentes, metadata y JSON-LD
+│   ├── page.tsx            # Página principal (ensambla todas las secciones)
+│   ├── globals.css         # Tailwind 4 + paleta de colores personalizada
+│   └── api/contact/
+│       └── route.ts        # POST /api/contact (email + fallback JSON)
+├── components/
+│   ├── Header.tsx          # Header sticky con nav y menú móvil
+│   ├── Hero.tsx            # Sección hero con animaciones Framer Motion
+│   ├── Services.tsx        # Rejilla de áreas de atención
+│   ├── ProcessSteps.tsx    # Proceso en 3 pasos
+│   ├── TherapyQuiz.tsx     # Wizard interactivo de orientación
+│   ├── Approach.tsx        # Enfoque terapéutico (TCC)
+│   ├── OnlineTherapy.tsx   # Sección terapia online
+│   ├── Testimonials.tsx    # Testimonios anónimos
+│   ├── FAQ.tsx             # Acordeón de preguntas frecuentes
+│   ├── Location.tsx        # Ubicación, horarios, mapa estilizado
+│   ├── ContactForm.tsx     # Formulario completo con validación
+│   ├── StickyMobileBar.tsx # Barra inferior fija en móvil
+│   ├── Footer.tsx          # Footer completo con disclaimer
+│   └── JsonLd.tsx          # Datos estructurados (Schema.org)
+├── lib/
+│   ├── constants.ts        # Datos ficticios del psicólogo
+│   └── contact-schema.ts   # Esquema Zod del formulario
+├── data/
+│   └── contact-submissions.json  # Creado automáticamente al enviar formulario
+├── .env.example
+├── .env.local
+└── README.md
+```
+
+---
+
+## Scripts disponibles
+
+```bash
+npm run dev      # Servidor de desarrollo (http://localhost:3000)
+npm run build    # Build de producción
+npm run start    # Servidor de producción (requiere build previo)
+npm run lint     # ESLint
+```
+
+---
+
+## Datos ficticios utilizados
+
+| Campo              | Valor ficticio                            |
+|--------------------|-------------------------------------------|
+| Nombre             | Dr. Mateo Aranda Solís                    |
+| Studio             | Centro Psicológico Horizonte              |
+| Dirección          | Calle Brisa 214, Col. Monteverde, Mérida  |
+| Teléfono           | +52 999 123 4567                          |
+| WhatsApp           | +52 999 123 4567                          |
+| Email (real/test)  | sayitlouder.dev@gmail.com                 |
+| Cédula             | 9876543                                   |
+| Experiencia        | 8 años                                    |
+| Valoraciones       | 31 positivas                              |
+| Precio             | Primera sesión desde $700 MXN             |
+
+**Nota legal:** Este es un proyecto demostrativo con fines de portfolio. No representa a ningún profesional real.
+
+---
+
+## Despliegue en Vercel
+
+```bash
+npx vercel
+```
+
+Configura las variables de entorno en el dashboard de Vercel antes de hacer deploy.
