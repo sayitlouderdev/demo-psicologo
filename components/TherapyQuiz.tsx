@@ -194,11 +194,11 @@ export function TherapyQuiz() {
                 </div>
                 <div className="h-1.5 bg-gray-100 rounded-full overflow-hidden">
                   <motion.div
-                    className="h-full rounded-full"
+                    className="h-full w-full rounded-full origin-left"
                     style={{ backgroundColor: "var(--color-sage-500)" }}
                     initial={false}
-                    animate={{ width: `${((currentStep + 1) / steps.length) * 100}%` }}
-                    transition={{ duration: 0.4 }}
+                    animate={{ scaleX: (currentStep + 1) / steps.length }}
+                    transition={{ duration: 0.4, ease: [0.32, 0.72, 0, 1] }}
                   />
                 </div>
               </div>
@@ -212,7 +212,7 @@ export function TherapyQuiz() {
                   initial="enter"
                   animate="center"
                   exit="exit"
-                  transition={{ duration: 0.28, ease: "easeInOut" }}
+                  transition={{ duration: 0.28, ease: [0.32, 0.72, 0, 1] as const }}
                 >
                   <h3
                     className="text-2xl font-medium mb-6"

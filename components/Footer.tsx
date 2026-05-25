@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { Phone, Mail, MapPin, Clock } from "lucide-react";
 import { DOCTOR, NAV_LINKS, whatsappUrl, MAPS_URL } from "@/lib/constants";
 
@@ -13,10 +14,10 @@ export function Footer() {
   return (
     <footer
       className="pb-20 md:pb-0"
-      style={{ backgroundColor: "var(--color-night)" }}
+      style={{ background: "linear-gradient(135deg, #163d3d 0%, #1e6464 40%, #1a3838 100%)" }}
       role="contentinfo"
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-10">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-10">
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
           {/* Brand */}
           <div className="lg:col-span-2">
@@ -29,7 +30,7 @@ export function Footer() {
             <p className="text-sm mb-6" style={{ color: "var(--color-sage-300)" }}>
               {DOCTOR.name}
             </p>
-            <p className="text-sm text-gray-400 leading-relaxed mb-6 max-w-sm">
+            <p className="text-sm text-white/60 leading-relaxed mb-6 max-w-sm">
               Psicoterapia individual y de pareja en Mérida y online. Enfoque
               cognitivo-conductual basado en evidencia, con un acompañamiento cálido y
               profesional.
@@ -50,7 +51,7 @@ export function Footer() {
 
           {/* Navigation */}
           <nav aria-label="Mapa del sitio">
-            <h3 className="text-xs font-medium uppercase tracking-widest text-gray-500 mb-5">
+            <h3 className="text-xs font-medium uppercase tracking-widest text-white/40 mb-5">
               Navegación
             </h3>
             <ul className="space-y-3">
@@ -58,7 +59,7 @@ export function Footer() {
                 <li key={link.href}>
                   <a
                     href={link.href}
-                    className="text-sm text-gray-400 hover:text-white transition-colors"
+                    className="text-sm text-white/60 hover:text-white transition-colors"
                   >
                     {link.label}
                   </a>
@@ -69,27 +70,27 @@ export function Footer() {
 
           {/* Contact */}
           <div>
-            <h3 className="text-xs font-medium uppercase tracking-widest text-gray-500 mb-5">
+            <h3 className="text-xs font-medium uppercase tracking-widest text-white/40 mb-5">
               Contacto
             </h3>
             <ul className="space-y-3">
               <li>
                 <a
                   href={`tel:${DOCTOR.phoneRaw}`}
-                  className="flex items-center gap-2.5 text-sm text-gray-400 hover:text-white transition-colors"
+                  className="flex items-center gap-2.5 text-sm text-white/60 hover:text-white transition-colors"
                   aria-label={`Llamar a ${DOCTOR.phone}`}
                 >
-                  <Phone className="w-4 h-4 flex-shrink-0 text-gray-600" aria-hidden="true" />
+                  <Phone className="w-4 h-4 flex-shrink-0 text-white/35" aria-hidden="true" />
                   {DOCTOR.phone}
                 </a>
               </li>
               <li>
                 <a
                   href={`mailto:${DOCTOR.email}`}
-                  className="flex items-center gap-2.5 text-sm text-gray-400 hover:text-white transition-colors"
+                  className="flex items-center gap-2.5 text-sm text-white/60 hover:text-white transition-colors"
                   aria-label={`Email: ${DOCTOR.email}`}
                 >
-                  <Mail className="w-4 h-4 flex-shrink-0 text-gray-600" aria-hidden="true" />
+                  <Mail className="w-4 h-4 flex-shrink-0 text-white/35" aria-hidden="true" />
                   {DOCTOR.email}
                 </a>
               </li>
@@ -98,20 +99,20 @@ export function Footer() {
                   href={MAPS_URL}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-start gap-2.5 text-sm text-gray-400 hover:text-white transition-colors"
+                  className="flex items-start gap-2.5 text-sm text-white/60 hover:text-white transition-colors"
                   aria-label="Ver dirección en Google Maps"
                 >
-                  <MapPin className="w-4 h-4 flex-shrink-0 text-gray-600 mt-0.5" aria-hidden="true" />
+                  <MapPin className="w-4 h-4 flex-shrink-0 text-white/35 mt-0.5" aria-hidden="true" />
                   <span>{DOCTOR.address.full}</span>
                 </a>
               </li>
               <li>
-                <div className="flex items-start gap-2.5 text-sm text-gray-400">
-                  <Clock className="w-4 h-4 flex-shrink-0 text-gray-600 mt-0.5" aria-hidden="true" />
+                <div className="flex items-start gap-2.5 text-sm text-white/60">
+                  <Clock className="w-4 h-4 flex-shrink-0 text-white/35 mt-0.5" aria-hidden="true" />
                   <div className="space-y-0.5">
                     {DOCTOR.hours.map((h) => (
                       <p key={h.days}>
-                        <span className="text-gray-500">{h.days}:</span> {h.time}
+                        <span className="text-white/40">{h.days}:</span> {h.time}
                       </p>
                     ))}
                   </div>
@@ -124,24 +125,27 @@ export function Footer() {
         {/* Divider */}
         <div className="border-t border-white/8 pt-8 space-y-4">
           {/* Medical disclaimer */}
-          <p className="text-xs text-gray-500 leading-relaxed max-w-3xl">
-            <strong className="text-gray-400">Aviso importante:</strong> La información de este
+          <p className="text-xs text-white/40 leading-relaxed max-w-3xl">
+            <strong className="text-white/60">Aviso importante:</strong> La información de este
             sitio no sustituye una evaluación psicológica profesional. En caso de emergencia o
             riesgo para la vida, contacta a los servicios de emergencia de tu localidad (911 en
             México).
           </p>
 
-          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 text-xs text-gray-600">
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 text-xs text-white/35">
             <p>
               Cédula profesional: {DOCTOR.license} ·{" "}
               {DOCTOR.studio} © {new Date().getFullYear()}
             </p>
-            <p
-              className="px-3 py-1 rounded-full text-center border border-dashed"
-              style={{ borderColor: "rgba(255,255,255,0.08)" }}
-            >
-              Proyecto demostrativo con datos ficticios · Portfolio web
-            </p>
+            <div className="flex flex-wrap items-center gap-x-4 gap-y-1">
+              <Link href="/aviso-de-privacidad" className="hover:text-white/60 transition-colors">
+                Aviso de Privacidad
+              </Link>
+              <span aria-hidden="true">·</span>
+              <Link href="/terminos" className="hover:text-white/60 transition-colors">
+                Términos y Condiciones
+              </Link>
+            </div>
           </div>
         </div>
       </div>

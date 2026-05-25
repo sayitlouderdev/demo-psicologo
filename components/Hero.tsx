@@ -1,7 +1,8 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { Award, Star, Monitor, CheckCircle2, MessageSquare } from "lucide-react";
+import Image from "next/image";
+import { motion, useReducedMotion } from "framer-motion";
+import { Award, Star, Monitor, CheckCircle2, Mail } from "lucide-react";
 import { DOCTOR, whatsappUrl } from "@/lib/constants";
 
 const fadeUp = {
@@ -27,10 +28,12 @@ const trustBadges = [
 ];
 
 export function Hero() {
+  const reduceMotion = useReducedMotion();
+
   return (
     <section
       id="inicio"
-      className="relative min-h-screen flex items-center overflow-hidden"
+      className="relative min-h-[100dvh] flex items-center overflow-hidden"
       style={{
         background: "linear-gradient(135deg, #163d3d 0%, #1e6464 55%, #1a3838 100%)",
       }}
@@ -47,7 +50,7 @@ export function Hero() {
             top: "-8%",
             right: "3%",
           }}
-          animate={{ x: [0, 28, -12, 0], y: [0, -18, 14, 0], scale: [1, 1.08, 0.96, 1] }}
+          animate={reduceMotion ? {} : { x: [0, 28, -12, 0], y: [0, -18, 14, 0], scale: [1, 1.08, 0.96, 1] }}
           transition={{ duration: 19, repeat: Infinity, ease: "easeInOut" }}
         />
         <motion.div
@@ -59,7 +62,7 @@ export function Hero() {
             bottom: "8%",
             left: "3%",
           }}
-          animate={{ x: [0, -18, 10, 0], y: [0, 14, -8, 0], scale: [1, 0.96, 1.07, 1] }}
+          animate={reduceMotion ? {} : { x: [0, -18, 10, 0], y: [0, 14, -8, 0], scale: [1, 0.96, 1.07, 1] }}
           transition={{ duration: 23, repeat: Infinity, ease: "easeInOut", delay: 4 }}
         />
         <motion.div
@@ -71,7 +74,7 @@ export function Hero() {
             top: "35%",
             left: "42%",
           }}
-          animate={{ x: [0, 14, -7, 0], y: [0, -10, 7, 0] }}
+          animate={reduceMotion ? {} : { x: [0, 14, -7, 0], y: [0, -10, 7, 0] }}
           transition={{ duration: 27, repeat: Infinity, ease: "easeInOut", delay: 9 }}
         />
       </div>
@@ -149,8 +152,8 @@ export function Hero() {
                 href="#contacto"
                 className="inline-flex items-center justify-center gap-2.5 px-7 py-4 rounded-full bg-white/10 hover:bg-white/20 text-white font-medium text-base transition-all border border-white/20"
               >
-                <MessageSquare className="w-5 h-5" aria-hidden="true" />
-                Enviar mensaje
+                <Mail className="w-5 h-5" aria-hidden="true" />
+                Enviar e-mail
               </a>
             </motion.div>
 
@@ -185,97 +188,86 @@ export function Hero() {
             transition={{ duration: 0.9, delay: 0.45, ease: [0.22, 1, 0.36, 1] }}
             className="flex justify-center lg:justify-end"
           >
-            <div className="bg-white rounded-3xl shadow-2xl p-8 max-w-sm w-full relative overflow-hidden">
+            <div
+              className="rounded-3xl shadow-2xl overflow-hidden max-w-sm w-full relative"
+              style={{ minHeight: "480px" }}
+            >
+              {/* Full-card photo */}
+              <Image
+                src="/doctor-photo.png"
+                alt="Foto del Dr. Mateo Aranda Solís"
+                fill
+                className="object-cover object-top"
+                priority
+              />
+
+              {/* Bottom gradient overlay */}
               <div
-                className="absolute top-0 right-0 w-40 h-40 rounded-full opacity-10 pointer-events-none"
+                className="absolute inset-0 pointer-events-none"
                 style={{
-                  background: "radial-gradient(circle, var(--color-sage-500), transparent)",
-                  transform: "translate(35%, -35%)",
+                  background:
+                    "linear-gradient(to top, rgba(15,45,45,0.97) 0%, rgba(15,45,45,0.82) 38%, rgba(15,45,45,0.25) 62%, transparent 80%)",
                 }}
                 aria-hidden="true"
               />
 
-              {/* Avatar */}
-              <div className="flex flex-col items-center text-center mb-6">
-                <div
-                  className="w-24 h-24 rounded-full mb-4 flex items-center justify-center text-3xl font-light text-white shadow-inner"
-                  style={{
-                    background:
-                      "linear-gradient(135deg, var(--color-teal-700), var(--color-sage-500))",
-                    fontFamily: "var(--font-cormorant), Georgia, serif",
-                  }}
-                  role="img"
-                  aria-label="Foto del Dr. Mateo Aranda Solís"
-                >
-                  MA
-                </div>
+              {/* Content */}
+              <div className="absolute bottom-0 left-0 right-0 p-6">
+                {/* Name + title + badge */}
                 <h2
-                  className="text-xl font-semibold mb-1"
-                  style={{
-                    color: "var(--color-night)",
-                    fontFamily: "var(--font-cormorant), Georgia, serif",
-                  }}
+                  className="text-xl font-semibold text-white mb-0.5"
+                  style={{ fontFamily: "var(--font-cormorant), Georgia, serif" }}
                 >
                   {DOCTOR.name}
                 </h2>
-                <p
-                  className="text-sm font-medium mb-3"
-                  style={{ color: "var(--color-teal-700)" }}
-                >
+                <p className="text-sm font-medium mb-3 text-white/75">
                   {DOCTOR.title}
                 </p>
                 <span
-                  className="inline-block px-3 py-1.5 rounded-full text-xs font-medium border"
+                  className="inline-block px-3 py-1.5 rounded-full text-xs font-medium border border-white/20 mb-4"
                   style={{
-                    backgroundColor: "var(--color-sage-50)",
-                    color: "var(--color-sage-700)",
-                    borderColor: "var(--color-sage-200)",
+                    backgroundColor: "rgba(255,255,255,0.12)",
+                    color: "rgba(255,255,255,0.85)",
                   }}
                 >
                   Terapia cognitivo-conductual
                 </span>
-              </div>
 
-              {/* Stats */}
-              <div className="grid grid-cols-2 gap-3 mb-5">
-                {[
-                  { value: "8+", label: "años de experiencia" },
-                  { value: "31", label: "valoraciones positivas" },
-                ].map((stat) => (
-                  <div
-                    key={stat.label}
-                    className="rounded-xl p-3 text-center"
-                    style={{ backgroundColor: "var(--color-cream)" }}
-                  >
+                {/* Stats */}
+                <div className="grid grid-cols-2 gap-2 mb-3">
+                  {[
+                    { value: "8+", label: "años de experiencia" },
+                    { value: "31", label: "valoraciones positivas" },
+                  ].map((stat) => (
                     <div
-                      className="text-2xl font-semibold mb-0.5"
-                      style={{
-                        color: "var(--color-teal-700)",
-                        fontFamily: "var(--font-cormorant), Georgia, serif",
-                      }}
+                      key={stat.label}
+                      className="rounded-xl p-3 text-center border border-white/15"
+                      style={{ backgroundColor: "rgba(255,255,255,0.10)" }}
                     >
-                      {stat.value}
+                      <div
+                        className="text-2xl font-semibold mb-0.5 text-white"
+                        style={{ fontFamily: "var(--font-cormorant), Georgia, serif", fontVariantNumeric: "tabular-nums" }}
+                      >
+                        {stat.value}
+                      </div>
+                      <div className="text-xs text-white/65">{stat.label}</div>
                     </div>
-                    <div className="text-xs text-gray-500">{stat.label}</div>
-                  </div>
-                ))}
-              </div>
+                  ))}
+                </div>
 
-              {/* Availability pill */}
-              <div
-                className="flex items-center gap-2 p-3 rounded-xl border"
-                style={{
-                  backgroundColor: "var(--color-sage-50)",
-                  borderColor: "var(--color-sage-100)",
-                }}
-              >
-                <span
-                  className="w-2.5 h-2.5 rounded-full animate-pulse flex-shrink-0"
-                  style={{ backgroundColor: "var(--color-sage-500)" }}
-                />
-                <span className="text-sm" style={{ color: "var(--color-sage-700)" }}>
-                  Aceptando nuevos pacientes
-                </span>
+                {/* Availability pill */}
+                <div
+                  className="flex items-center gap-2 p-3 rounded-xl border border-white/15"
+                  style={{ backgroundColor: "rgba(74,138,77,0.25)" }}
+                >
+                  <span
+                    className="w-2.5 h-2.5 rounded-full animate-pulse flex-shrink-0"
+                    style={{ backgroundColor: "var(--color-sage-400)" }}
+                  />
+                  <span className="text-sm text-white/90">
+                    Aceptando nuevos pacientes
+                  </span>
+                </div>
               </div>
             </div>
           </motion.div>
@@ -285,7 +277,7 @@ export function Hero() {
       {/* Scroll indicator */}
       <motion.div
         className="absolute bottom-8 left-1/2 -translate-x-1/2 hidden md:block"
-        animate={{ y: [0, 8, 0] }}
+        animate={reduceMotion ? {} : { y: [0, 8, 0] }}
         transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
         aria-hidden="true"
       >

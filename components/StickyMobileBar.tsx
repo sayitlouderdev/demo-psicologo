@@ -17,7 +17,7 @@ export function StickyMobileBar() {
       role="navigation"
       aria-label="Acciones rápidas"
     >
-      <div className="grid grid-cols-3 pb-safe">
+      <div className="grid grid-cols-3" style={{ paddingBottom: "env(safe-area-inset-bottom, 0px)" }}>
         <a
           href={whatsappUrl()}
           target="_blank"

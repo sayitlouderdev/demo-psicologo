@@ -149,56 +149,15 @@ export function Location() {
             <div
               className="rounded-3xl overflow-hidden shadow-md relative"
               style={{ aspectRatio: "4/3" }}
-              aria-label="Mapa de ubicación del consultorio"
+              aria-label="Mapa de Mérida, Yucatán"
             >
-              {/* Stylized map background */}
-              <div
-                className="absolute inset-0"
-                style={{
-                  background:
-                    "linear-gradient(145deg, var(--color-teal-50) 0%, var(--color-sage-50) 60%, var(--color-cream) 100%)",
-                }}
-                aria-hidden="true"
+              <iframe
+                src="https://www.openstreetmap.org/export/embed.html?bbox=-89.75%2C20.85%2C-89.45%2C21.08&layer=mapnik"
+                title="Mérida, Yucatán"
+                className="w-full h-full border-0"
+                loading="lazy"
+                referrerPolicy="no-referrer"
               />
-              {/* Grid lines simulating streets */}
-              <div className="absolute inset-0 opacity-20" aria-hidden="true">
-                {[20, 40, 60, 80].map((v) => (
-                  <div
-                    key={`h${v}`}
-                    className="absolute left-0 right-0 h-px bg-gray-400"
-                    style={{ top: `${v}%` }}
-                  />
-                ))}
-                {[20, 40, 60, 80].map((v) => (
-                  <div
-                    key={`v${v}`}
-                    className="absolute top-0 bottom-0 w-px bg-gray-400"
-                    style={{ left: `${v}%` }}
-                  />
-                ))}
-              </div>
-
-              {/* Pin */}
-              <div
-                className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-col items-center"
-                aria-hidden="true"
-              >
-                <div
-                  className="w-12 h-12 rounded-full flex items-center justify-center shadow-lg"
-                  style={{ backgroundColor: "var(--color-teal-700)" }}
-                >
-                  <MapPin className="w-6 h-6 text-white" />
-                </div>
-                <div
-                  className="mt-2 px-3 py-1.5 rounded-xl text-xs font-medium text-white shadow-md text-center max-w-[180px]"
-                  style={{ backgroundColor: "var(--color-teal-800)" }}
-                >
-                  {DOCTOR.studio}
-                  <br />
-                  <span className="font-normal opacity-80">{DOCTOR.address.street}</span>
-                </div>
-              </div>
-
               {/* Overlay CTA */}
               <div className="absolute bottom-4 left-4 right-4">
                 <a

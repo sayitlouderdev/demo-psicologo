@@ -7,7 +7,6 @@ import { Approach } from "@/components/Approach";
 import { OnlineTherapy } from "@/components/OnlineTherapy";
 import { Testimonials } from "@/components/Testimonials";
 import { FAQ } from "@/components/FAQ";
-import { Location } from "@/components/Location";
 import { ContactForm } from "@/components/ContactForm";
 import { Footer } from "@/components/Footer";
 
@@ -24,7 +23,6 @@ export default function Home() {
         <OnlineTherapy />
         <Testimonials />
         <FAQ />
-        <Location />
         <ContactForm />
       </main>
       <Footer />

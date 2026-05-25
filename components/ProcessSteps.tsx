@@ -28,24 +28,12 @@ export function ProcessSteps() {
   return (
     <section
       id="proceso"
-      className="py-24"
+      className="py-16"
       style={{ backgroundColor: "var(--color-cream-dark)" }}
       aria-labelledby="process-heading"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-16"
-        >
-          <p
-            className="text-sm font-medium uppercase tracking-widest mb-4"
-            style={{ color: "var(--color-sage-600)" }}
-          >
-            Proceso terapéutico
-          </p>
+        <div className="text-center mb-16">
           <h2
             id="process-heading"
             className="text-4xl lg:text-5xl font-light"
@@ -56,9 +44,22 @@ export function ProcessSteps() {
           >
             Un proceso claro desde la primera sesión
           </h2>
-        </motion.div>
+        </div>
 
         <div className="grid md:grid-cols-3 gap-10 relative">
+          {/* Dashed connector line between the 3 step circles — desktop only */}
+          <div
+            className="hidden md:block absolute pointer-events-none"
+            style={{
+              top: "2rem",
+              left: "calc(16.67% + 2rem)",
+              right: "calc(16.67% + 2rem)",
+              height: "1px",
+              backgroundImage:
+                "repeating-linear-gradient(to right, var(--color-sage-200) 0, var(--color-sage-200) 6px, transparent 6px, transparent 14px)",
+            }}
+            aria-hidden="true"
+          />
           {steps.map((step, i) => {
             const Icon = step.icon;
             return (
@@ -100,7 +101,7 @@ export function ProcessSteps() {
                 >
                   {step.title}
                 </h3>
-                <p className="text-gray-500 text-sm leading-relaxed max-w-xs">
+                <p className="text-gray-500 text-base leading-relaxed max-w-xs">
                   {step.description}
                 </p>
               </motion.div>

@@ -29,24 +29,12 @@ export function Testimonials() {
   return (
     <section
       id="testimonios"
-      className="py-24"
-      style={{ backgroundColor: "var(--color-teal-50)" }}
+      className="py-20"
+      style={{ backgroundColor: "var(--color-cream)" }}
       aria-labelledby="testimonials-heading"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-14"
-        >
-          <p
-            className="text-sm font-medium uppercase tracking-widest mb-4"
-            style={{ color: "var(--color-teal-700)" }}
-          >
-            Testimonios
-          </p>
+        <div className="text-center mb-14">
           <h2
             id="testimonials-heading"
             className="text-4xl lg:text-5xl font-light"
@@ -57,7 +45,7 @@ export function Testimonials() {
           >
             Lo que dicen quienes han pasado por aquí
           </h2>
-        </motion.div>
+        </div>
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {testimonials.map((t, i) => (
@@ -68,7 +56,6 @@ export function Testimonials() {
               viewport={{ once: true, margin: "-60px" }}
               transition={{ duration: 0.6, delay: i * 0.1 }}
               className="bg-white rounded-2xl p-6 shadow-sm border border-white flex flex-col"
-              cite="#"
             >
               {/* Quote mark */}
               <div

@@ -40,26 +40,27 @@ function FAQItem({ faq, index }: { faq: { q: string; a: string }; index: number 
   const id = `faq-answer-${index}`;
 
   return (
-    <div className="border-b border-gray-200 last:border-0">
+    <div className="border-b border-white/10 last:border-0">
       <button
+        id={`faq-q-${index}`}
         onClick={() => setOpen(!open)}
-        className="w-full flex items-center justify-between py-5 text-left gap-4 focus-visible:outline-none focus-visible:ring-2 rounded-sm"
-        style={{ color: "var(--color-night)" }}
+        className="w-full flex items-center justify-between py-5 text-left gap-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/30 rounded-sm"
+        style={{ color: "white" }}
         aria-expanded={open}
         aria-controls={id}
       >
-        <span className="font-medium text-base">{faq.q}</span>
+        <span className="font-medium text-base text-white">{faq.q}</span>
         <span
           className="flex-shrink-0 w-7 h-7 rounded-full flex items-center justify-center transition-colors"
           style={{
-            backgroundColor: open ? "var(--color-sage-100)" : "var(--color-cream)",
+            backgroundColor: open ? "rgba(144,194,144,0.20)" : "rgba(255,255,255,0.08)",
           }}
           aria-hidden="true"
         >
           {open ? (
-            <Minus className="w-3.5 h-3.5" style={{ color: "var(--color-sage-600)" }} />
+            <Minus className="w-3.5 h-3.5" style={{ color: "var(--color-sage-300)" }} />
           ) : (
-            <Plus className="w-3.5 h-3.5" style={{ color: "var(--color-sage-600)" }} />
+            <Plus className="w-3.5 h-3.5" style={{ color: "var(--color-sage-300)" }} />
           )}
         </span>
       </button>
@@ -76,7 +77,7 @@ function FAQItem({ faq, index }: { faq: { q: string; a: string }; index: number 
             transition={{ duration: 0.25, ease: "easeInOut" }}
             className="overflow-hidden"
           >
-            <p className="text-gray-500 text-sm leading-relaxed pb-5 pr-10">{faq.a}</p>
+            <p className="text-white/80 text-sm leading-relaxed pb-5 pr-10">{faq.a}</p>
           </motion.div>
         )}
       </AnimatePresence>
@@ -88,7 +89,10 @@ export function FAQ() {
   return (
     <section
       id="faq"
-      className="py-24 bg-white"
+      className="py-32"
+      style={{
+        background: "linear-gradient(135deg, #1a2638 0%, #2d3f55 55%, #1a2638 100%)",
+      }}
       aria-labelledby="faq-heading"
     >
       <div className="max-w-3xl mx-auto px-4 sm:px-6">
@@ -101,17 +105,14 @@ export function FAQ() {
         >
           <p
             className="text-sm font-medium uppercase tracking-widest mb-4"
-            style={{ color: "var(--color-sage-600)" }}
+            style={{ color: "var(--color-sage-300)" }}
           >
             Preguntas frecuentes
           </p>
           <h2
             id="faq-heading"
-            className="text-4xl lg:text-5xl font-light"
-            style={{
-              color: "var(--color-night)",
-              fontFamily: "var(--font-cormorant), Georgia, serif",
-            }}
+            className="text-4xl lg:text-5xl font-light text-white"
+            style={{ fontFamily: "var(--font-cormorant), Georgia, serif" }}
           >
             Respuestas a tus dudas más comunes
           </h2>
@@ -122,7 +123,8 @@ export function FAQ() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.1 }}
-          className="bg-white rounded-3xl border border-gray-200 px-6 sm:px-8"
+          className="rounded-3xl border border-white/10 px-6 sm:px-8"
+          style={{ backgroundColor: "rgba(255,255,255,0.05)" }}
         >
           {faqs.map((faq, i) => (
             <FAQItem key={i} faq={faq} index={i} />

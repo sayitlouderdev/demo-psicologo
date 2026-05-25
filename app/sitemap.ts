@@ -1,0 +1,27 @@
+import type { MetadataRoute } from "next";
+
+// Update SITE_URL to the real domain before deploying
+const SITE_URL = "https://centropsicologicohorizonte.mx";
+
+export default function sitemap(): MetadataRoute.Sitemap {
+  return [
+    {
+      url: SITE_URL,
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 1,
+    },
+    {
+      url: `${SITE_URL}/aviso-de-privacidad`,
+      lastModified: new Date(),
+      changeFrequency: "yearly",
+      priority: 0.3,
+    },
+    {
+      url: `${SITE_URL}/terminos`,
+      lastModified: new Date(),
+      changeFrequency: "yearly",
+      priority: 0.3,
+    },
+  ];
+}

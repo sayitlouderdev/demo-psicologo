@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
+import type React from "react";
 import { Cormorant_Garamond, Inter } from "next/font/google";
+import { MotionConfig } from "framer-motion";
 import "./globals.css";
 import { JsonLd } from "@/components/JsonLd";
 import { StickyMobileBar } from "@/components/StickyMobileBar";
@@ -66,8 +68,17 @@ export default function RootLayout({
       className={`${cormorant.variable} ${inter.variable} h-full`}
     >
       <body className="min-h-full flex flex-col antialiased" style={{ fontFamily: "var(--font-inter), system-ui, sans-serif" }}>
+        <a
+          href="#inicio"
+          className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[9999] focus:px-4 focus:py-2 focus:rounded-lg focus:text-sm focus:font-medium focus:text-white"
+          style={{ backgroundColor: "var(--color-teal-700)" } as React.CSSProperties}
+        >
+          Saltar al contenido
+        </a>
         <JsonLd />
-        {children}
+        <MotionConfig reducedMotion="user">
+          {children}
+        </MotionConfig>
         <StickyMobileBar />
       </body>
     </html>

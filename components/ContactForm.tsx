@@ -1,12 +1,13 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { motion, AnimatePresence } from "framer-motion";
-import { Send, CheckCircle2, AlertCircle, Loader2, Phone, MessageSquare, Mail } from "lucide-react";
+import { Send, CheckCircle2, AlertCircle, Loader2, Phone, MessageSquare, Mail, MapPin, Clock, ExternalLink } from "lucide-react";
 import { contactSchema, ContactFormData, REASON_LABELS, MODALITY_LABELS } from "@/lib/contact-schema";
-import { DOCTOR, whatsappUrl } from "@/lib/constants";
+import { DOCTOR, whatsappUrl, MAPS_URL } from "@/lib/constants";
 
 export function ContactForm() {
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
@@ -53,63 +54,45 @@ export function ContactForm() {
   return (
     <section
       id="contacto"
-      className="py-24 bg-white"
+      className="py-32"
+      style={{ backgroundColor: "var(--color-cream)" }}
       aria-labelledby="contact-heading"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid lg:grid-cols-2 gap-16 items-start">
-          {/* Left: info */}
+
+        {/* Section header */}
+        <div className="text-center mb-14">
+          <h2
+            id="contact-heading"
+            className="text-4xl lg:text-5xl font-light mb-4"
+            style={{
+              color: "var(--color-night)",
+              fontFamily: "var(--font-cormorant), Georgia, serif",
+            }}
+          >
+            Da el primer paso
+          </h2>
+          <p className="text-gray-500 text-base max-w-xl mx-auto leading-relaxed">
+            Escríbeme o visítame en consulta. Te respondo a la brevedad.
+          </p>
+        </div>
+
+        <div className="grid lg:grid-cols-2 gap-10 items-start">
+
+          {/* Left: info + map */}
           <motion.div
             initial={{ opacity: 0, x: -24 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.7 }}
+            className="space-y-5"
           >
-            <p
-              className="text-sm font-medium uppercase tracking-widest mb-4"
-              style={{ color: "var(--color-sage-600)" }}
-            >
-              Contacto
-            </p>
-            <h2
-              id="contact-heading"
-              className="text-4xl lg:text-5xl font-light mb-6"
-              style={{
-                color: "var(--color-night)",
-                fontFamily: "var(--font-cormorant), Georgia, serif",
-              }}
-            >
-              Da el primer paso
-            </h2>
-            <p className="text-gray-500 text-base leading-relaxed mb-10">
-              Si tienes preguntas, quieres saber más sobre el proceso o deseas agendar
-              una primera sesión, escríbeme. Te respondo a la brevedad.
-            </p>
-
             {/* Quick contacts */}
-            <div className="space-y-4 mb-10">
+            <div className="grid sm:grid-cols-3 gap-3">
               {[
-                {
-                  icon: MessageSquare,
-                  label: "WhatsApp",
-                  value: DOCTOR.phone,
-                  href: whatsappUrl(),
-                  external: true,
-                },
-                {
-                  icon: Phone,
-                  label: "Teléfono",
-                  value: DOCTOR.phone,
-                  href: `tel:${DOCTOR.phoneRaw}`,
-                  external: false,
-                },
-                {
-                  icon: Mail,
-                  label: "Email",
-                  value: DOCTOR.email,
-                  href: `mailto:${DOCTOR.email}`,
-                  external: false,
-                },
+                { icon: MessageSquare, label: "WhatsApp", value: DOCTOR.phone, href: whatsappUrl(), external: true },
+                { icon: Phone, label: "Teléfono", value: DOCTOR.phone, href: `tel:${DOCTOR.phoneRaw}`, external: false },
+                { icon: Mail, label: "Email", value: DOCTOR.email, href: `mailto:${DOCTOR.email}`, external: false },
               ].map((c) => {
                 const Icon = c.icon;
                 return (
@@ -118,42 +101,86 @@ export function ContactForm() {
                     href={c.href}
                     target={c.external ? "_blank" : undefined}
                     rel={c.external ? "noopener noreferrer" : undefined}
-                    className="flex items-center gap-4 p-4 rounded-2xl border border-gray-100 hover:border-gray-200 hover:shadow-sm transition-all group"
+                    className="flex flex-col items-center gap-2 p-4 rounded-2xl border border-gray-100 bg-white hover:border-gray-200 hover:shadow-sm transition-all text-center"
                     aria-label={`${c.label}: ${c.value}`}
                   >
                     <div
-                      className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0"
+                      className="w-9 h-9 rounded-xl flex items-center justify-center"
                       style={{ backgroundColor: "var(--color-cream)" }}
                       aria-hidden="true"
                     >
-                      <Icon
-                        className="w-5 h-5"
-                        style={{ color: "var(--color-teal-700)" }}
-                        aria-hidden="true"
-                      />
+                      <Icon className="w-4 h-4" style={{ color: "var(--color-teal-700)" }} aria-hidden="true" />
                     </div>
                     <div>
                       <p className="text-xs text-gray-400 font-medium">{c.label}</p>
-                      <p className="text-sm font-medium" style={{ color: "var(--color-night)" }}>
-                        {c.value}
-                      </p>
+                      <p className="text-xs font-medium leading-tight" style={{ color: "var(--color-night)" }}>{c.value}</p>
                     </div>
                   </a>
                 );
               })}
             </div>
 
+            {/* Address + hours */}
+            <div className="bg-white rounded-2xl p-5 border border-gray-100 shadow-sm">
+              <div className="grid sm:grid-cols-2 gap-5">
+                <div className="flex items-start gap-3">
+                  <div className="w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0" style={{ backgroundColor: "var(--color-sage-50)" }}>
+                    <MapPin className="w-4 h-4" style={{ color: "var(--color-sage-600)" }} aria-hidden="true" />
+                  </div>
+                  <div>
+                    <p className="text-sm font-medium text-gray-900 mb-1">Dirección</p>
+                    <address className="not-italic text-sm text-gray-500 leading-relaxed">
+                      {DOCTOR.address.street}<br />
+                      {DOCTOR.address.colony}<br />
+                      {DOCTOR.address.city}
+                    </address>
+                  </div>
+                </div>
+                <div className="flex items-start gap-3">
+                  <div className="w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0" style={{ backgroundColor: "var(--color-teal-50)" }}>
+                    <Clock className="w-4 h-4" style={{ color: "var(--color-teal-700)" }} aria-hidden="true" />
+                  </div>
+                  <div>
+                    <p className="text-sm font-medium text-gray-900 mb-2">Horarios</p>
+                    <div className="space-y-0.5">
+                      {DOCTOR.hours.map((h) => (
+                        <p key={h.days} className="text-xs text-gray-500">
+                          <span className="font-medium text-gray-700">{h.days}:</span> {h.time}
+                        </p>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Map */}
+            <div className="rounded-2xl overflow-hidden shadow-sm border border-gray-100 relative" style={{ aspectRatio: "16/9" }}>
+              <iframe
+                src="https://www.openstreetmap.org/export/embed.html?bbox=-89.75%2C20.85%2C-89.45%2C21.08&layer=mapnik"
+                title="Mérida, Yucatán"
+                className="w-full h-full border-0"
+                loading="lazy"
+                referrerPolicy="no-referrer"
+              />
+              <div className="absolute bottom-3 left-3 right-3">
+                <a
+                  href={MAPS_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center justify-center gap-2 w-full py-2.5 rounded-xl text-xs font-medium text-white transition-all hover:-translate-y-0.5 shadow-md"
+                  style={{ backgroundColor: "var(--color-teal-700)" }}
+                  aria-label="Abrir en Google Maps"
+                >
+                  <ExternalLink className="w-3.5 h-3.5" aria-hidden="true" />
+                  Cómo llegar → Google Maps
+                </a>
+              </div>
+            </div>
+
             {/* Price note */}
-            <div
-              className="p-5 rounded-2xl border"
-              style={{
-                backgroundColor: "var(--color-sage-50)",
-                borderColor: "var(--color-sage-100)",
-              }}
-            >
-              <p className="text-sm font-medium mb-1" style={{ color: "var(--color-sage-800)" }}>
-                {DOCTOR.price}
-              </p>
+            <div className="p-4 rounded-2xl border" style={{ backgroundColor: "var(--color-sage-50)", borderColor: "var(--color-sage-100)" }}>
+              <p className="text-sm font-medium mb-0.5" style={{ color: "var(--color-sage-800)" }}>{DOCTOR.price}</p>
               <p className="text-xs" style={{ color: "var(--color-sage-600)" }}>
                 Sin compromiso. La primera sesión es también una oportunidad para conocernos.
               </p>
@@ -372,7 +399,15 @@ export function ContactForm() {
                           />
                           <span className="text-xs text-gray-500 leading-relaxed">
                             He leído y acepto que mis datos sean utilizados para gestionar
-                            esta solicitud de contacto, conforme a la política de privacidad.{" "}
+                            esta solicitud de contacto, conforme a la{" "}
+                            <Link
+                              href="/aviso-de-privacidad"
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="underline hover:text-gray-700 transition-colors"
+                            >
+                              política de privacidad
+                            </Link>.{" "}
                             <span className="text-red-400" aria-label="obligatorio">*</span>
                           </span>
                         </label>

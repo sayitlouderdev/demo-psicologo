@@ -9,48 +9,36 @@ const services = [
     title: "Ansiedad",
     description:
       "Gestión de pensamientos intrusivos, preocupación excesiva y síntomas físicos de ansiedad generalizada.",
-    accentColor: "var(--color-teal-700)",
-    bgColor: "var(--color-teal-50)",
   },
   {
     icon: Heart,
     title: "Depresión",
     description:
       "Acompañamiento en procesos de tristeza persistente, pérdida de motivación y vacío emocional.",
-    accentColor: "var(--color-sage-600)",
-    bgColor: "var(--color-sage-50)",
   },
   {
     icon: Wind,
     title: "Ataques de pánico",
     description:
       "Intervención cognitivo-conductual para reducir y superar los episodios de pánico e hiperventilación.",
-    accentColor: "var(--color-teal-700)",
-    bgColor: "var(--color-teal-50)",
   },
   {
     icon: Flame,
     title: "Estrés y burnout",
     description:
       "Estrategias concretas para recuperar el equilibrio cuando el agotamiento interfiere con tu vida.",
-    accentColor: "var(--color-sage-600)",
-    bgColor: "var(--color-sage-50)",
   },
   {
     icon: Users,
     title: "Terapia de pareja",
     description:
       "Trabajo en comunicación, resolución de conflictos y vínculos para fortalecer la relación.",
-    accentColor: "var(--color-teal-700)",
-    bgColor: "var(--color-teal-50)",
   },
   {
     icon: Sparkles,
     title: "Autoestima y cambio personal",
     description:
       "Procesos de transformación personal, identidad y desarrollo del bienestar emocional a largo plazo.",
-    accentColor: "var(--color-sage-600)",
-    bgColor: "var(--color-sage-50)",
   },
 ];
 
@@ -67,11 +55,27 @@ export function Services() {
   return (
     <section
       id="servicios"
-      className="py-24"
-      style={{ backgroundColor: "var(--color-cream)" }}
+      className="relative py-28"
       aria-labelledby="services-heading"
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      {/* Background image */}
+      <div
+        className="absolute inset-0"
+        style={{
+          backgroundImage: "url('/services-bg.png')",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+        }}
+        aria-hidden="true"
+      />
+      {/* Subtle dark scrim for heading readability */}
+      <div
+        className="absolute inset-0"
+        style={{ background: "rgba(0,0,0,0.35)" }}
+        aria-hidden="true"
+      />
+
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -80,22 +84,18 @@ export function Services() {
           className="text-center mb-16"
         >
           <p
-            className="text-sm font-medium uppercase tracking-widest mb-4"
-            style={{ color: "var(--color-sage-600)" }}
+            className="text-sm font-medium uppercase tracking-widest mb-4 text-white"
           >
             Áreas de atención
           </p>
           <h2
             id="services-heading"
-            className="text-4xl lg:text-5xl font-light mb-5"
-            style={{
-              color: "var(--color-night)",
-              fontFamily: "var(--font-cormorant), Georgia, serif",
-            }}
+            className="text-4xl lg:text-5xl font-light mb-5 text-white"
+            style={{ fontFamily: "var(--font-cormorant), Georgia, serif" }}
           >
             Áreas en las que puedo acompañarte
           </h2>
-          <p className="text-gray-500 text-lg max-w-2xl mx-auto leading-relaxed">
+          <p className="text-white/90 text-lg max-w-2xl mx-auto leading-relaxed">
             Cada proceso terapéutico es único. Trabajo con un enfoque personalizado
             adaptado a las necesidades específicas de cada persona.
           </p>
@@ -114,29 +114,29 @@ export function Services() {
               <motion.article
                 key={service.title}
                 variants={card}
-                className="group bg-white rounded-2xl p-7 shadow-sm hover:shadow-md border border-gray-100 transition-all duration-300 hover:-translate-y-1"
+                className="group rounded-2xl p-7 border border-white/15 transition-all duration-300 hover:-translate-y-1 hover:border-white/25"
+                style={{ backgroundColor: "rgba(22,61,61,0.70)" }}
               >
-                <div
-                  className="w-12 h-12 rounded-xl flex items-center justify-center mb-5"
-                  style={{ backgroundColor: service.bgColor }}
-                  aria-hidden="true"
-                >
-                  <Icon
-                    className="w-6 h-6"
-                    style={{ color: service.accentColor }}
+                <div className="flex items-center gap-3 mb-4">
+                  <div
+                    className="w-11 h-11 rounded-xl flex items-center justify-center flex-shrink-0"
+                    style={{ backgroundColor: "rgba(255,255,255,0.12)" }}
                     aria-hidden="true"
-                  />
+                  >
+                    <Icon
+                      className="w-5 h-5"
+                      style={{ color: "var(--color-sage-300)" }}
+                      aria-hidden="true"
+                    />
+                  </div>
+                  <h3
+                    className="text-xl font-medium text-white"
+                    style={{ fontFamily: "var(--font-cormorant), Georgia, serif" }}
+                  >
+                    {service.title}
+                  </h3>
                 </div>
-                <h3
-                  className="text-xl font-medium mb-2"
-                  style={{
-                    color: "var(--color-night)",
-                    fontFamily: "var(--font-cormorant), Georgia, serif",
-                  }}
-                >
-                  {service.title}
-                </h3>
-                <p className="text-gray-500 text-sm leading-relaxed">{service.description}</p>
+                <p className="text-white text-base leading-relaxed">{service.description}</p>
               </motion.article>
             );
           })}
