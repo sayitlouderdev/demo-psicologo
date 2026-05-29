@@ -15,7 +15,7 @@ export const DOCTOR = {
   phone: "+52 999 123 4567",
   phoneRaw: "529991234567",
   whatsapp: "529991234567",
-  email: "sayitlouder.dev@gmail.com",
+  email: "hola@liberastudio.com",
   hours: [
     { days: "Lunes a Viernes", time: "09:00 – 19:00" },
     { days: "Sábado", time: "10:00 – 14:00" },

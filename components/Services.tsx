@@ -115,7 +115,7 @@ export function Services() {
                 key={service.title}
                 variants={card}
                 className="group rounded-2xl p-7 border border-white/15 transition-all duration-300 hover:-translate-y-1 hover:border-white/25"
-                style={{ backgroundColor: "rgba(22,61,61,0.70)" }}
+                style={{ backgroundColor: "rgba(26,38,56,0.82)" }}
               >
                 <div className="flex items-center gap-3 mb-4">
                   <div

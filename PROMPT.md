@@ -8,7 +8,7 @@ Sei un senior full stack developer e UI/UX designer. Devi creare da zero una lan
 IMPORTANTE:
 - Non usare dati reali di persone, indirizzi, numeri o profili esistenti.
 - Tutti i dati devono essere fittizi.
-- L'unica email reale da usare per test è: sayitlouder.dev@gmail.com
+- L'unica email reale da usare per test è: hola@liberastudio.com
 - Il progetto deve essere creato dentro questa cartella Windows: D:\CHATGPT\PSICOLOGO
 - Se la cartella non esiste, creala.
 - Non limitarti a generare file isolati: crea un progetto completo installabile, avviabile e testabile subito.
@@ -25,7 +25,7 @@ DATI FITTIZI:
 - Studio: Centro Psicológico Horizonte
 - Indirizzo: Calle Brisa 214, Colonia Monteverde, Mérida, Yucatán, México
 - Telefono: +52 999 123 4567
-- Email test: sayitlouder.dev@gmail.com
+- Email test: hola@liberastudio.com
 - Cédula: 9876543 | Esperienza: 8 años | Valoraciones: 31 | Prezzo: $700 MXN
 
 STACK: Next.js ultima versione · TypeScript · Tailwind CSS · Framer Motion · shadcn/ui · lucide-react · React Hook Form · Zod · Nodemailer · ESLint
@@ -37,7 +37,7 @@ FORM CONTATTI:
 - Campi: nome, email, telefono, motivo, modalità (online/presencial/indistinto), messaggio, consenso privacy
 - Validazione client: React Hook Form + Zod
 - Validazione server: Zod nella API route POST /api/contact
-- Con SMTP configurato: invia email a sayitlouder.dev@gmail.com
+- Con SMTP configurato: invia email a hola@liberastudio.com
 - Senza SMTP: salva in /data/contact-submissions.json
 - Anti-spam: honeypot hidden field
 - Stati: loading, success, error
@@ -62,7 +62,7 @@ DELIVERABLE:
 - Build TypeScript pulita senza errori
 - README.md + .env.example
 - Codice componentizzato (15+ componenti)
-- Nessun dato reale tranne sayitlouder.dev@gmail.com
+- Nessun dato reale tranne hola@liberastudio.com
 ```
 
 ---
@@ -118,4 +118,4 @@ DELIVERABLE:
 
 **Form fallback:** Senza SMTP configurato, i lead vengono salvati in `data/contact-submissions.json`. Testabile immediatamente senza credenziali email.
 
-**Dati fittizi:** Tutti i dati del sito sono inventati. L'unico dato reale è `sayitlouder.dev@gmail.com` usato come email di test per il form.
+**Dati fittizi:** Tutti i dati del sito sono inventati. L'unico dato reale è `hola@liberastudio.com` usato come email di test per il form.

@@ -3,48 +3,58 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Plus, Minus } from "lucide-react";
+import { AuroraBackground } from "@/components/ui/aurora-background";
 
 const faqs = [
   {
-    q: "¿Cuánto dura una sesión?",
-    a: "Las sesiones tienen una duración estándar de 50 minutos. En casos específicos, como sesiones de evaluación inicial o ciertas modalidades de terapia de pareja, pueden acordarse sesiones de mayor duración.",
+    q: "¿Cuánto cuesta la primera sesión?",
+    a: "La primera sesión tiene un costo desde $700 MXN. En ella realizamos una evaluación inicial para conocer tu situación, definir objetivos y decidir juntos si hay sintonía para trabajar. Las sesiones siguientes se coordinan directamente con el Dr. Aranda según tu proceso.",
   },
   {
-    q: "¿La terapia online funciona igual que la presencial?",
-    a: "Sí. La evidencia científica indica que la terapia online es igual de eficaz que la presencial para la mayoría de las problemáticas. Lo importante es contar con un espacio privado, sin interrupciones, y una conexión estable a internet.",
+    q: "¿Cuál es el horario de atención?",
+    a: "Atendemos de lunes a viernes de 09:00 a 19:00 h, y los sábados de 10:00 a 14:00 h. Los domingos no hay consulta. Puedes contactarnos por WhatsApp o teléfono al +52 999 123 4567 para verificar disponibilidad.",
   },
   {
     q: "¿Qué pasa en la primera cita?",
-    a: "La primera sesión es una evaluación inicial donde conversamos sobre tu situación, lo que te trajo a consulta y lo que esperas de la terapia. No hay respuestas correctas ni incorrectas: es un espacio para conocernos, explorar y ver si hay sintonía.",
+    a: "La primera sesión es un espacio de evaluación y escucha. Conversamos sobre lo que te trae a consulta, tu historia y lo que esperas de la terapia. No hay respuestas correctas ni incorrectas — es una oportunidad para conocernos y ver si el enfoque del Dr. Aranda encaja con lo que necesitas.",
+  },
+  {
+    q: "¿La terapia online funciona igual que la presencial?",
+    a: "Sí. La evidencia científica respalda la eficacia de la terapia online para la mayoría de las problemáticas. Solo necesitas un espacio privado, sin interrupciones, y conexión estable a internet. El Dr. Aranda atiende de forma online para toda la República Mexicana.",
   },
   {
     q: "¿Atiendes terapia de pareja?",
-    a: "Sí. Trabajo con parejas en situaciones de conflicto, comunicación difícil, crisis o momentos de transición. El enfoque es colaborativo: ambas personas participan activamente en el proceso.",
+    a: "Sí. El Dr. Aranda trabaja con parejas en situaciones de conflicto recurrente, problemas de comunicación, crisis de convivencia o momentos de transición. El proceso es colaborativo: ambas personas participan activamente desde la primera sesión.",
   },
   {
-    q: "¿Cómo puedo agendar una cita?",
-    a: "Puedes contactarme por WhatsApp, por teléfono o a través del formulario de contacto de este sitio. Te responderé a la brevedad para coordinar disponibilidad y confirmar tu primera sesión.",
+    q: "¿Dónde está el consultorio presencial?",
+    a: "El consultorio está ubicado en Calle Brisa 214, Colonia Monteverde, Mérida, Yucatán. Si prefieres atención presencial, puedes agendar directamente por WhatsApp o teléfono para confirmar disponibilidad de espacio.",
   },
   {
     q: "¿La información que comparto es confidencial?",
-    a: "Absolutamente. Todo lo que se comparte en sesión está protegido por el secreto profesional. La confidencialidad es uno de los pilares fundamentales de la práctica psicológica ética.",
-  },
-  {
-    q: "¿Cuándo debería buscar ayuda psicológica?",
-    a: "Siempre que sientas que algo interfiere con tu bienestar o funcionamiento cotidiano. No es necesario estar en crisis para beneficiarse de la terapia. Muchas personas también la utilizan como un espacio de crecimiento personal y autoconocimiento.",
+    a: "Absolutamente. Todo lo que se comparte en sesión está protegido por el secreto profesional y el Código Ético del psicólogo. El Dr. Aranda cuenta con cédula profesional 9876543. La confidencialidad solo tiene excepciones en casos de riesgo grave para la vida, conforme a la normativa vigente.",
   },
 ];
 
-function FAQItem({ faq, index }: { faq: { q: string; a: string }; index: number }) {
-  const [open, setOpen] = useState(false);
+function FAQItem({
+  faq,
+  index,
+  open,
+  onToggle,
+}: {
+  faq: { q: string; a: string };
+  index: number;
+  open: boolean;
+  onToggle: () => void;
+}) {
   const id = `faq-answer-${index}`;
 
   return (
     <div className="border-b border-white/10 last:border-0">
       <button
         id={`faq-q-${index}`}
-        onClick={() => setOpen(!open)}
-        className="w-full flex items-center justify-between py-5 text-left gap-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/30 rounded-sm"
+        onClick={onToggle}
+        className="w-full flex items-center justify-between py-5 text-left gap-4 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/30 rounded-sm"
         style={{ color: "white" }}
         aria-expanded={open}
         aria-controls={id}
@@ -86,16 +96,24 @@ function FAQItem({ faq, index }: { faq: { q: string; a: string }; index: number 
 }
 
 export function FAQ() {
+  const [openIndex, setOpenIndex] = useState<number>(0);
+
+  function toggle(i: number) {
+    setOpenIndex(openIndex === i ? -1 : i);
+  }
+
   return (
-    <section
+    <AuroraBackground
       id="faq"
-      className="py-32"
+      className="py-32 text-white"
       style={{
         background: "linear-gradient(135deg, #1a2638 0%, #2d3f55 55%, #1a2638 100%)",
       }}
+      showRadialGradient={false}
+      role="region"
       aria-labelledby="faq-heading"
     >
-      <div className="max-w-3xl mx-auto px-4 sm:px-6">
+      <div className="max-w-3xl mx-auto px-4 sm:px-6 w-full">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -127,10 +145,10 @@ export function FAQ() {
           style={{ backgroundColor: "rgba(255,255,255,0.05)" }}
         >
           {faqs.map((faq, i) => (
-            <FAQItem key={i} faq={faq} index={i} />
+            <FAQItem key={i} faq={faq} index={i} open={openIndex === i} onToggle={() => toggle(i)} />
           ))}
         </motion.div>
       </div>
-    </section>
+    </AuroraBackground>
   );
 }

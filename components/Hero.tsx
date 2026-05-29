@@ -4,6 +4,7 @@ import Image from "next/image";
 import { motion, useReducedMotion } from "framer-motion";
 import { Award, Star, Monitor, CheckCircle2, Mail } from "lucide-react";
 import { DOCTOR, whatsappUrl } from "@/lib/constants";
+import { EtherealShadow } from "@/components/ui/etheral-shadow";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 28 },
@@ -34,50 +35,19 @@ export function Hero() {
     <section
       id="inicio"
       className="relative min-h-[100dvh] flex items-center overflow-hidden"
-      style={{
-        background: "linear-gradient(135deg, #163d3d 0%, #1e6464 55%, #1a3838 100%)",
-      }}
+      style={{ background: "linear-gradient(135deg, #163d3d 0%, #1e6464 55%, #1a3838 100%)" }}
       aria-label="Sección principal"
     >
-      {/* Animated background blobs */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
-        <motion.div
-          className="absolute rounded-full"
-          style={{
-            width: 520,
-            height: 520,
-            background: "radial-gradient(circle, rgba(74,138,77,0.18), transparent 70%)",
-            top: "-8%",
-            right: "3%",
-          }}
-          animate={reduceMotion ? {} : { x: [0, 28, -12, 0], y: [0, -18, 14, 0], scale: [1, 1.08, 0.96, 1] }}
-          transition={{ duration: 19, repeat: Infinity, ease: "easeInOut" }}
-        />
-        <motion.div
-          className="absolute rounded-full"
-          style={{
-            width: 380,
-            height: 380,
-            background: "radial-gradient(circle, rgba(201,168,76,0.12), transparent 70%)",
-            bottom: "8%",
-            left: "3%",
-          }}
-          animate={reduceMotion ? {} : { x: [0, -18, 10, 0], y: [0, 14, -8, 0], scale: [1, 0.96, 1.07, 1] }}
-          transition={{ duration: 23, repeat: Infinity, ease: "easeInOut", delay: 4 }}
-        />
-        <motion.div
-          className="absolute rounded-full"
-          style={{
-            width: 300,
-            height: 300,
-            background: "radial-gradient(circle, rgba(255,255,255,0.04), transparent 70%)",
-            top: "35%",
-            left: "42%",
-          }}
-          animate={reduceMotion ? {} : { x: [0, 14, -7, 0], y: [0, -10, 7, 0] }}
-          transition={{ duration: 27, repeat: Infinity, ease: "easeInOut", delay: 9 }}
-        />
-      </div>
+      {/* Ethereal shadow — white light on dark green */}
+      {!reduceMotion && (
+        <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
+          <EtherealShadow
+            color="rgba(255, 255, 255, 0.55)"
+            animation={{ scale: 100, speed: 90 }}
+            sizing="fill"
+          />
+        </div>
+      )}
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-36 w-full">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
@@ -141,7 +111,7 @@ export function Hero() {
                 href={whatsappUrl()}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-2.5 px-7 py-4 rounded-full text-white font-medium text-base transition-all shadow-lg hover:shadow-xl hover:-translate-y-0.5 active:translate-y-0"
+                className="inline-flex items-center justify-center gap-2.5 px-7 py-4 rounded-full text-white font-medium text-base transition-all shadow-md hover:shadow-lg hover:-translate-y-0.5 active:translate-y-0"
                 style={{ backgroundColor: "var(--color-sage-500)" }}
                 aria-label="Agendar cita por WhatsApp"
               >
@@ -181,7 +151,7 @@ export function Hero() {
             </motion.div>
           </div>
 
-          {/* Right: doctor card */}
+          {/* Right: doctor card — unchanged, dark overlay works on any bg */}
           <motion.div
             initial={{ opacity: 0, x: 40, scale: 0.96 }}
             animate={{ opacity: 1, x: 0, scale: 1 }}
@@ -192,7 +162,6 @@ export function Hero() {
               className="rounded-3xl shadow-2xl overflow-hidden max-w-sm w-full relative"
               style={{ minHeight: "480px" }}
             >
-              {/* Full-card photo */}
               <Image
                 src="/doctor-photo.png"
                 alt="Foto del Dr. Mateo Aranda Solís"
@@ -200,8 +169,6 @@ export function Hero() {
                 className="object-cover object-top"
                 priority
               />
-
-              {/* Bottom gradient overlay */}
               <div
                 className="absolute inset-0 pointer-events-none"
                 style={{
@@ -210,30 +177,20 @@ export function Hero() {
                 }}
                 aria-hidden="true"
               />
-
-              {/* Content */}
               <div className="absolute bottom-0 left-0 right-0 p-6">
-                {/* Name + title + badge */}
                 <h2
                   className="text-xl font-semibold text-white mb-0.5"
                   style={{ fontFamily: "var(--font-cormorant), Georgia, serif" }}
                 >
                   {DOCTOR.name}
                 </h2>
-                <p className="text-sm font-medium mb-3 text-white/75">
-                  {DOCTOR.title}
-                </p>
+                <p className="text-sm font-medium mb-3 text-white/75">{DOCTOR.title}</p>
                 <span
                   className="inline-block px-3 py-1.5 rounded-full text-xs font-medium border border-white/20 mb-4"
-                  style={{
-                    backgroundColor: "rgba(255,255,255,0.12)",
-                    color: "rgba(255,255,255,0.85)",
-                  }}
+                  style={{ backgroundColor: "rgba(255,255,255,0.12)", color: "rgba(255,255,255,0.85)" }}
                 >
                   Terapia cognitivo-conductual
                 </span>
-
-                {/* Stats */}
                 <div className="grid grid-cols-2 gap-2 mb-3">
                   {[
                     { value: "8+", label: "años de experiencia" },
@@ -254,8 +211,6 @@ export function Hero() {
                     </div>
                   ))}
                 </div>
-
-                {/* Availability pill */}
                 <div
                   className="flex items-center gap-2 p-3 rounded-xl border border-white/15"
                   style={{ backgroundColor: "rgba(74,138,77,0.25)" }}
@@ -264,9 +219,7 @@ export function Hero() {
                     className="w-2.5 h-2.5 rounded-full animate-pulse flex-shrink-0"
                     style={{ backgroundColor: "var(--color-sage-400)" }}
                   />
-                  <span className="text-sm text-white/90">
-                    Aceptando nuevos pacientes
-                  </span>
+                  <span className="text-sm text-white/90">Aceptando nuevos pacientes</span>
                 </div>
               </div>
             </div>

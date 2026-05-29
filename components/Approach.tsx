@@ -97,7 +97,7 @@ export function Approach() {
                 className="absolute inset-0"
                 style={{
                   background:
-                    "linear-gradient(135deg, rgba(15,45,45,0.88) 0%, rgba(22,61,61,0.80) 100%)",
+                    "linear-gradient(135deg, rgba(26,38,56,0.90) 0%, rgba(45,63,85,0.85) 100%)",
                 }}
                 aria-hidden="true"
               />

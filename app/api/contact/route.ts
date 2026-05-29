@@ -44,7 +44,7 @@ export async function POST(req: NextRequest) {
         },
       });
 
-      const toEmail = process.env.CONTACT_TO_EMAIL ?? "sayitlouder.dev@gmail.com";
+      const toEmail = process.env.CONTACT_TO_EMAIL ?? "hola@liberastudio.com";
       const fromEmail = process.env.SMTP_FROM ?? process.env.SMTP_USER ?? toEmail;
 
       await transporter.sendMail({

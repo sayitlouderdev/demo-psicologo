@@ -1,6 +1,8 @@
 @import "tailwindcss";
 
 @theme {
+  /* Aurora animation */
+  --animate-aurora: aurora 60s linear infinite;
   /* Fonts */
   --font-heading: var(--font-cormorant);
   --font-body: var(--font-inter);
@@ -40,6 +42,23 @@
   /* Gold */
   --color-gold: #c9a84c;
   --color-gold-light: #d4b86a;
+}
+
+@keyframes aurora {
+  from { background-position: 50% 50%, 50% 50%; }
+  to   { background-position: 350% 50%, 350% 50%; }
+}
+
+:root {
+  --white: #ffffff;
+  --black: #000000;
+  --transparent: transparent;
+  /* Aurora gradient — brand palette (teal · sage · gold) */
+  --aurora-1: #237a7a;   /* teal-600  */
+  --aurora-2: #4bb3b3;   /* teal-400  */
+  --aurora-3: #90c290;   /* sage-300  */
+  --aurora-4: #d4b86a;   /* gold-light */
+  --aurora-5: #2d9898;   /* teal-500  */
 }
 
 html {

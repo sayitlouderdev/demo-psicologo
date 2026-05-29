@@ -3,7 +3,7 @@
 Landing page profesional para un psicólogo ficticio, creada como proyecto de portfolio para agencia web.
 Stack: **Next.js 16 · TypeScript · Tailwind CSS 4 · Framer Motion · React Hook Form + Zod · Nodemailer**
 
-> **Todos los datos del sitio son ficticios.** El único dato real es el email de prueba: `sayitlouder.dev@gmail.com`
+> **Todos los datos del sitio son ficticios.** El único dato real es el email de prueba: `hola@liberastudio.com`
 
 ---
 
@@ -33,7 +33,7 @@ Copia `.env.example` a `.env.local` y edita según necesites:
 
 | Variable           | Descripción                                          | Obligatoria |
 |--------------------|------------------------------------------------------|-------------|
-| `CONTACT_TO_EMAIL` | Email que recibirá los mensajes del formulario       | No (default: `sayitlouder.dev@gmail.com`) |
+| `CONTACT_TO_EMAIL` | Email que recibirá los mensajes del formulario       | No (default: `hola@liberastudio.com`) |
 | `SMTP_HOST`        | Host SMTP para envío de emails                       | No          |
 | `SMTP_PORT`        | Puerto SMTP (587 por defecto)                        | No          |
 | `SMTP_USER`        | Usuario / dirección SMTP                             | No          |
@@ -133,7 +133,7 @@ npm run lint     # ESLint
 | Dirección          | Calle Brisa 214, Col. Monteverde, Mérida  |
 | Teléfono           | +52 999 123 4567                          |
 | WhatsApp           | +52 999 123 4567                          |
-| Email (real/test)  | sayitlouder.dev@gmail.com                 |
+| Email (real/test)  | hola@liberastudio.com                     |
 | Cédula             | 9876543                                   |
 | Experiencia        | 8 años                                    |
 | Valoraciones       | 31 positivas                              |

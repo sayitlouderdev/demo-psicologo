@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { Video, Shield, Clock, Globe, CheckCircle2 } from "lucide-react";
+import Image from "next/image";
 import { whatsappUrl } from "@/lib/constants";
 
 const benefits = [
@@ -141,25 +142,21 @@ export function OnlineTherapy() {
                     </span>
                   </div>
                   <div className="grid grid-cols-2 gap-3">
-                    <div
-                      className="aspect-video rounded-xl flex items-center justify-center"
-                      style={{ backgroundColor: "var(--color-teal-50)" }}
-                    >
-                      <div
-                        className="w-10 h-10 rounded-full flex items-center justify-center text-sm font-medium text-white"
-                        style={{
-                          background:
-                            "linear-gradient(135deg, var(--color-sage-600), var(--color-sage-500))",
-                        }}
-                      >
-                        MA
-                      </div>
+                    <div className="aspect-video rounded-xl overflow-hidden relative">
+                      <Image
+                        src="/online-doctor.png"
+                        alt="Dr. Mateo Aranda en sesión online"
+                        fill
+                        className="object-cover"
+                      />
                     </div>
-                    <div
-                      className="aspect-video rounded-xl flex items-center justify-center"
-                      style={{ backgroundColor: "var(--color-cream-dark)" }}
-                    >
-                      <span className="text-xs text-gray-400">Tú</span>
+                    <div className="aspect-video rounded-xl overflow-hidden relative">
+                      <Image
+                        src="/online-client.png"
+                        alt="Paciente en sesión online"
+                        fill
+                        className="object-cover"
+                      />
                     </div>
                   </div>
                 </div>

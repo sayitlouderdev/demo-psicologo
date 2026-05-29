@@ -1,21 +1,22 @@
 import type { Metadata } from "next";
 import type React from "react";
-import { Cormorant_Garamond, Inter } from "next/font/google";
+import { Forum, Elms_Sans } from "next/font/google";
 import { MotionConfig } from "framer-motion";
 import "./globals.css";
 import { JsonLd } from "@/components/JsonLd";
 import { StickyMobileBar } from "@/components/StickyMobileBar";
 import { DOCTOR } from "@/lib/constants";
 
-const cormorant = Cormorant_Garamond({
+const forum = Forum({
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700"],
+  weight: ["400"],
   variable: "--font-cormorant",
   display: "swap",
 });
 
-const inter = Inter({
+const elmsSans = Elms_Sans({
   subsets: ["latin"],
+  weight: "variable",
   variable: "--font-inter",
   display: "swap",
 });
@@ -65,7 +66,7 @@ export default function RootLayout({
   return (
     <html
       lang="es"
-      className={`${cormorant.variable} ${inter.variable} h-full`}
+      className={`${forum.variable} ${elmsSans.variable} h-full`}
     >
       <body className="min-h-full flex flex-col antialiased" style={{ fontFamily: "var(--font-inter), system-ui, sans-serif" }}>
         <a
