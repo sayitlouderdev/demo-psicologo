@@ -3,7 +3,6 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Plus, Minus } from "lucide-react";
-import { AuroraBackground } from "@/components/ui/aurora-background";
 
 const faqs = [
   {
@@ -50,27 +49,42 @@ function FAQItem({
   const id = `faq-answer-${index}`;
 
   return (
-    <div className="border-b border-white/10 last:border-0">
+    <div
+      className="border-b last:border-0"
+      style={{ borderColor: "rgba(22, 61, 61, 0.1)" }}
+    >
       <button
         id={`faq-q-${index}`}
         onClick={onToggle}
-        className="w-full flex items-center justify-between py-5 text-left gap-4 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/30 rounded-sm"
-        style={{ color: "white" }}
+        className="w-full flex items-center justify-between py-5 text-left gap-4 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sage-500/40 rounded-sm"
         aria-expanded={open}
         aria-controls={id}
       >
-        <span className="font-medium text-base text-white">{faq.q}</span>
+        <span
+          className="font-medium text-base"
+          style={{ color: "var(--color-teal-900)" }}
+        >
+          {faq.q}
+        </span>
         <span
           className="flex-shrink-0 w-7 h-7 rounded-full flex items-center justify-center transition-colors"
           style={{
-            backgroundColor: open ? "rgba(144,194,144,0.20)" : "rgba(255,255,255,0.08)",
+            backgroundColor: open
+              ? "rgba(74, 138, 77, 0.12)"
+              : "rgba(0, 0, 0, 0.05)",
           }}
           aria-hidden="true"
         >
           {open ? (
-            <Minus className="w-3.5 h-3.5" style={{ color: "var(--color-sage-300)" }} />
+            <Minus
+              className="w-3.5 h-3.5"
+              style={{ color: "var(--color-sage-500)" }}
+            />
           ) : (
-            <Plus className="w-3.5 h-3.5" style={{ color: "var(--color-sage-300)" }} />
+            <Plus
+              className="w-3.5 h-3.5"
+              style={{ color: "var(--color-sage-500)" }}
+            />
           )}
         </span>
       </button>
@@ -87,7 +101,12 @@ function FAQItem({
             transition={{ duration: 0.25, ease: "easeInOut" }}
             className="overflow-hidden"
           >
-            <p className="text-white/80 text-sm leading-relaxed pb-5 pr-10">{faq.a}</p>
+            <p
+              className="text-sm leading-relaxed pb-5 pr-10"
+              style={{ color: "var(--color-teal-700)" }}
+            >
+              {faq.a}
+            </p>
           </motion.div>
         )}
       </AnimatePresence>
@@ -103,13 +122,13 @@ export function FAQ() {
   }
 
   return (
-    <AuroraBackground
+    <section
       id="faq"
-      className="py-32 text-white"
+      className="py-32"
       style={{
-        background: "linear-gradient(135deg, #1a2638 0%, #2d3f55 55%, #1a2638 100%)",
+        background:
+          "linear-gradient(160deg, #f8faf8 0%, #edf4ed 55%, #f8faf8 100%)",
       }}
-      showRadialGradient={false}
       role="region"
       aria-labelledby="faq-heading"
     >
@@ -123,14 +142,17 @@ export function FAQ() {
         >
           <p
             className="text-sm font-medium uppercase tracking-widest mb-4"
-            style={{ color: "var(--color-sage-300)" }}
+            style={{ color: "var(--color-sage-600)" }}
           >
             Preguntas frecuentes
           </p>
           <h2
             id="faq-heading"
-            className="text-4xl lg:text-5xl font-light text-white"
-            style={{ fontFamily: "var(--font-cormorant), Georgia, serif" }}
+            className="text-4xl lg:text-5xl font-light"
+            style={{
+              fontFamily: "var(--font-cormorant), Georgia, serif",
+              color: "var(--color-teal-900)",
+            }}
           >
             Respuestas a tus dudas más comunes
           </h2>
@@ -141,14 +163,20 @@ export function FAQ() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.1 }}
-          className="rounded-3xl border border-white/10 px-6 sm:px-8"
-          style={{ backgroundColor: "rgba(255,255,255,0.05)" }}
+          className="rounded-3xl px-6 sm:px-8 bg-white shadow-sm"
+          style={{ border: "1px solid rgba(22, 61, 61, 0.08)" }}
         >
           {faqs.map((faq, i) => (
-            <FAQItem key={i} faq={faq} index={i} open={openIndex === i} onToggle={() => toggle(i)} />
+            <FAQItem
+              key={i}
+              faq={faq}
+              index={i}
+              open={openIndex === i}
+              onToggle={() => toggle(i)}
+            />
           ))}
         </motion.div>
       </div>
-    </AuroraBackground>
+    </section>
   );
 }

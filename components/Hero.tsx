@@ -28,6 +28,76 @@ const trustBadges = [
   { icon: CheckCircle2, text: `Cédula: ${DOCTOR.license}` },
 ];
 
+function DoctorCard() {
+  return (
+    <div
+      className="rounded-3xl shadow-2xl overflow-hidden max-w-sm w-full relative"
+      style={{ minHeight: "480px" }}
+    >
+      <Image
+        src="/doctor-photo.png"
+        alt="Foto del Dr. Mateo Aranda Solís"
+        fill
+        className="object-cover object-top"
+        priority
+      />
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background:
+            "linear-gradient(to top, rgba(15,45,45,0.97) 0%, rgba(15,45,45,0.82) 38%, rgba(15,45,45,0.25) 62%, transparent 80%)",
+        }}
+        aria-hidden="true"
+      />
+      <div className="absolute bottom-0 left-0 right-0 p-6">
+        <h2
+          className="text-xl font-semibold text-white mb-0.5"
+          style={{ fontFamily: "var(--font-cormorant), Georgia, serif" }}
+        >
+          {DOCTOR.name}
+        </h2>
+        <p className="text-sm font-medium mb-3 text-white/75">{DOCTOR.title}</p>
+        <span
+          className="inline-block px-3 py-1.5 rounded-full text-xs font-medium border border-white/20 mb-4"
+          style={{ backgroundColor: "rgba(255,255,255,0.12)", color: "rgba(255,255,255,0.85)" }}
+        >
+          Terapia cognitivo-conductual
+        </span>
+        <div className="grid grid-cols-2 gap-2 mb-3">
+          {[
+            { value: "8+", label: "años de experiencia" },
+            { value: "31", label: "valoraciones positivas" },
+          ].map((stat) => (
+            <div
+              key={stat.label}
+              className="rounded-xl p-3 text-center border border-white/15"
+              style={{ backgroundColor: "rgba(255,255,255,0.10)" }}
+            >
+              <div
+                className="text-2xl font-semibold mb-0.5 text-white"
+                style={{ fontFamily: "var(--font-cormorant), Georgia, serif", fontVariantNumeric: "tabular-nums" }}
+              >
+                {stat.value}
+              </div>
+              <div className="text-xs text-white/65">{stat.label}</div>
+            </div>
+          ))}
+        </div>
+        <div
+          className="flex items-center gap-2 p-3 rounded-xl border border-white/15"
+          style={{ backgroundColor: "rgba(74,138,77,0.25)" }}
+        >
+          <span
+            className="w-2.5 h-2.5 rounded-full animate-pulse flex-shrink-0"
+            style={{ backgroundColor: "var(--color-sage-400)" }}
+          />
+          <span className="text-sm text-white/90">Aceptando nuevos pacientes</span>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export function Hero() {
   const reduceMotion = useReducedMotion();
 
@@ -87,9 +157,20 @@ export function Hero() {
               y dirección.
             </motion.h1>
 
+            {/* Doctor card — mobile only, between headline and subtitle */}
+            <motion.div
+              custom={2}
+              initial="hidden"
+              animate="visible"
+              variants={fadeUp}
+              className="flex justify-center lg:hidden mb-8"
+            >
+              <DoctorCard />
+            </motion.div>
+
             {/* Sub */}
             <motion.p
-              custom={2}
+              custom={3}
               initial="hidden"
               animate="visible"
               variants={fadeUp}
@@ -101,7 +182,7 @@ export function Hero() {
 
             {/* CTAs */}
             <motion.div
-              custom={3}
+              custom={4}
               initial="hidden"
               animate="visible"
               variants={fadeUp}
@@ -129,7 +210,7 @@ export function Hero() {
 
             {/* Trust badges */}
             <motion.div
-              custom={4}
+              custom={5}
               initial="hidden"
               animate="visible"
               variants={fadeUp}
@@ -151,78 +232,14 @@ export function Hero() {
             </motion.div>
           </div>
 
-          {/* Right: doctor card — unchanged, dark overlay works on any bg */}
+          {/* Right: doctor card — desktop only */}
           <motion.div
             initial={{ opacity: 0, x: 40, scale: 0.96 }}
             animate={{ opacity: 1, x: 0, scale: 1 }}
             transition={{ duration: 0.9, delay: 0.45, ease: [0.22, 1, 0.36, 1] }}
-            className="flex justify-center lg:justify-end"
+            className="hidden lg:flex justify-center lg:justify-end"
           >
-            <div
-              className="rounded-3xl shadow-2xl overflow-hidden max-w-sm w-full relative"
-              style={{ minHeight: "480px" }}
-            >
-              <Image
-                src="/doctor-photo.png"
-                alt="Foto del Dr. Mateo Aranda Solís"
-                fill
-                className="object-cover object-top"
-                priority
-              />
-              <div
-                className="absolute inset-0 pointer-events-none"
-                style={{
-                  background:
-                    "linear-gradient(to top, rgba(15,45,45,0.97) 0%, rgba(15,45,45,0.82) 38%, rgba(15,45,45,0.25) 62%, transparent 80%)",
-                }}
-                aria-hidden="true"
-              />
-              <div className="absolute bottom-0 left-0 right-0 p-6">
-                <h2
-                  className="text-xl font-semibold text-white mb-0.5"
-                  style={{ fontFamily: "var(--font-cormorant), Georgia, serif" }}
-                >
-                  {DOCTOR.name}
-                </h2>
-                <p className="text-sm font-medium mb-3 text-white/75">{DOCTOR.title}</p>
-                <span
-                  className="inline-block px-3 py-1.5 rounded-full text-xs font-medium border border-white/20 mb-4"
-                  style={{ backgroundColor: "rgba(255,255,255,0.12)", color: "rgba(255,255,255,0.85)" }}
-                >
-                  Terapia cognitivo-conductual
-                </span>
-                <div className="grid grid-cols-2 gap-2 mb-3">
-                  {[
-                    { value: "8+", label: "años de experiencia" },
-                    { value: "31", label: "valoraciones positivas" },
-                  ].map((stat) => (
-                    <div
-                      key={stat.label}
-                      className="rounded-xl p-3 text-center border border-white/15"
-                      style={{ backgroundColor: "rgba(255,255,255,0.10)" }}
-                    >
-                      <div
-                        className="text-2xl font-semibold mb-0.5 text-white"
-                        style={{ fontFamily: "var(--font-cormorant), Georgia, serif", fontVariantNumeric: "tabular-nums" }}
-                      >
-                        {stat.value}
-                      </div>
-                      <div className="text-xs text-white/65">{stat.label}</div>
-                    </div>
-                  ))}
-                </div>
-                <div
-                  className="flex items-center gap-2 p-3 rounded-xl border border-white/15"
-                  style={{ backgroundColor: "rgba(74,138,77,0.25)" }}
-                >
-                  <span
-                    className="w-2.5 h-2.5 rounded-full animate-pulse flex-shrink-0"
-                    style={{ backgroundColor: "var(--color-sage-400)" }}
-                  />
-                  <span className="text-sm text-white/90">Aceptando nuevos pacientes</span>
-                </div>
-              </div>
-            </div>
+            <DoctorCard />
           </motion.div>
         </div>
       </div>
